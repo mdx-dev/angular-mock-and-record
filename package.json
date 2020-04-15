@@ -1,6 +1,6 @@
 {
   "name": "angular-mock-record",
-  "version": "1.6.4",
+  "version": "1.6.5",
   "description": "An angular / protractor framework that mocks and records requests. Requests can be manually mocked or recorded like VCR.",
   "main": "server.js",
   "scripts": {
