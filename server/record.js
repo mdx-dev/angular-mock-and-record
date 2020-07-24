@@ -26,7 +26,7 @@ class Record {
   recordingExists(requestPath, requestUrl, label, defaultDomain) {
     let out = null;
     let tape = this.tapeExists(requestPath, label);
-    
+
     if (tape) {
       let recording = this.isRecordingOnTape(requestUrl, tape);
       let shouldCheckContext = this.config.context;
@@ -38,7 +38,7 @@ class Record {
           // return the first recording if: it has no context AND domain is either empty or default
           out = recording ? recording.find(rec => !!((!rec.domain || (rec.domain === defaultDomain)) && !rec.context)) : null;
         }
-        
+
         // when no context and client specific domain
         if (!shouldCheckContext && this.config.domain != defaultDomain) {
           // return the first recording if: it has no context AND matches requested domain
@@ -50,12 +50,12 @@ class Record {
         if (shouldCheckContext) {
           // return the first recording if: the domain matches requested domain AND context matches requested context
           out = recording ? recording.find(rec => !!(rec.domain === this.config.domain && rec.context === this.config.context)) : null;
-  
-        } 
+
+        }
 
       }
-
-    }  
+      tape = null; // clear to free memory
+    }
 
     return out;
   }
@@ -123,7 +123,7 @@ class Record {
     let dir = this.config.recording_dir + this.utilities.normalizePath(requestPath);
     let tape = this.tapeExists(requestPath, label);
 
-    if (tape) {  
+    if (tape) {
       out = tape;
     }
 
@@ -136,7 +136,7 @@ class Record {
     }
 
     out.push(data);
-    
+
     if (!this.fs.existsSync(dir)){
       this.utilities.mkDirByPathSync(dir);
     }
